@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "serve": "http-server -S -C cert.pem"
+  },
+  "dependencies": {
+    "http-server": "^14.0.0"
+  }
+}
