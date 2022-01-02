@@ -1,8 +1,13 @@
 {
   "scripts": {
-    "serve": "http-server -S -C cert.pem"
+    "serve": "http-server --port 8080",
+    "serve:secure": "http-server -S -C cert.pem --port 8080",
+    "tunnel": "lt --port 8080 --subdomain dparker-localhost",
+    "serve-tunnel": "npm-run-all --parallel serve tunnel"
   },
   "dependencies": {
-    "http-server": "^14.0.0"
+    "http-server": "^14.0.0",
+    "localtunnel": "^2.0.2",
+    "npm-run-all": "^4.1.5"
   }
 }

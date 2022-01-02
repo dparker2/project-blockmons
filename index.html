@@ -1,26 +1,53 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Location-based AR.js demo</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
-</head>
+    <script src="index.js"></script>
+  </head>
 
-<body style="margin: 0; overflow: hidden;">
-    <a-scene vr-mode-ui="enabled: false" embedded arjs="sourceType: webcam; debugUIEnabled: false;">
-        <a-assets>
-            <img id="not-pokemon-img" src="assets/notZubat.gif">
-        </a-assets>
-        <a-image src="#not-pokemon-img" position="0 2 -4"
-            animation="property: position; to: 3 1 -6; dur: 2000; easing: linear; loop: true; dir:alternate"
-            look-at="#camera" width="1.5" height="1.5">
-        </a-image>
-        <a-camera look-controls="touchEnabled:false;mouseEnabled:false;" id="camera"></a-camera>
+  <body style="margin: 0; overflow: hidden;">
+    <a-scene
+      vr-mode-ui="enabled: false"
+      embedded
+      arjs="sourceType: webcam; debugUIEnabled: false;"
+    >
+      <a-assets>
+        <img id="not-pokemon-img" src="assets/notZubat.gif" />
+      </a-assets>
+      <a-image
+        cursor-listener
+        src="#not-pokemon-img"
+        position="0 2 -4"
+        animation="property: position; to: 3 1 -6; dur: 2000; easing: linear; loop: true; dir:alternate"
+        look-at="#camera"
+        width="1.5"
+        height="1.5"
+      ></a-image>
+      <!-- <a-cursor></a-cursor>
+        <a-camera look-controls="touchEnabled:false;mouseEnabled:false;" id="camera"></a-camera> -->
+      <a-entity camera look-controls>
+        <a-entity
+          animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 150; from: 0.1 0.1 0.1; to: 1 1 1"
+          animation__fusing="property: scale; startEvents: fusing; easing: easeInCubic; dur: 1500; from: 1 1 1; to: 0.1 0.1 0.1"
+          animation__mouseleave="property: scale; startEvents: mouseleave; easing: easeInCubic; dur: 500; to: 1 1 1"
+          cursor="fuse: true;"
+          material="color: black; shader: flat"
+          position="0 0 -3"
+          geometry="primitive: ring"
+        ></a-entity>
+      </a-entity>
+
+      <a-entity
+        id="box"
+        cursor-listener
+        geometry="primitive: box"
+        material="color: blue"
+      ></a-entity>
     </a-scene>
-</body>
-
+  </body>
 </html>
