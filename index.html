@@ -32,22 +32,50 @@
         <a-camera look-controls="touchEnabled:false;mouseEnabled:false;" id="camera"></a-camera> -->
       <a-entity camera look-controls>
         <a-entity
+          id="main-cursor"
           animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 150; from: 0.1 0.1 0.1; to: 1 1 1"
           animation__fusing="property: scale; startEvents: fusing; easing: easeInCubic; dur: 1500; from: 1 1 1; to: 0.1 0.1 0.1"
           animation__mouseleave="property: scale; startEvents: mouseleave; easing: easeInCubic; dur: 500; to: 1 1 1"
-          cursor="fuse: true;"
+          cursor="fuse: true; upEvents: ['reset-fuse']"
           material="color: black; shader: flat"
           position="0 0 -3"
-          geometry="primitive: ring"
+          geometry="primitive: ring; radiusInner: .8; radiusOuter: 1.2"
         ></a-entity>
+        <a-ring
+          id="inner-cursor-shell"
+          position="0 0 -3"
+          geometry="radiusInner: 0.11; radiusOuter: 0.12"
+          material="color: black; shader: flat"
+        ></a-ring>
+        <a-ring
+          id="inner-cursor-1"
+          position="0 0 -3"
+          geometry="radiusInner: 0.08; radiusOuter: 0.09"
+          material="color: green; shader: flat"
+          visible="false"
+        ></a-ring>
+        <a-ring
+          id="inner-cursor-2"
+          position="0 0 -3"
+          geometry="radiusInner: 0.09; radiusOuter: 0.1"
+          material="color: green; shader: flat"
+          visible="false"
+        ></a-ring>
+        <a-ring
+          id="inner-cursor-3"
+          position="0 0 -3"
+          geometry="radiusInner: 0.1; radiusOuter: 0.11"
+          material="color: green; shader: flat"
+          visible="false"
+        ></a-ring>
+        <a-text
+          position="0 0 -3"
+          align="center"
+          value="CAUGHT!"
+          id="inner-cursor-text"
+          visible="false"
+        ></a-text>
       </a-entity>
-
-      <a-entity
-        id="box"
-        cursor-listener
-        geometry="primitive: box"
-        material="color: blue"
-      ></a-entity>
     </a-scene>
   </body>
 </html>
