@@ -1,81 +1,47 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Location-based AR.js demo</title>
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
-    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
-    <script src="index.js"></script>
-  </head>
 
-  <body style="margin: 0; overflow: hidden;">
-    <a-scene
-      vr-mode-ui="enabled: false"
-      embedded
-      arjs="sourceType: webcam; debugUIEnabled: false;"
-    >
-      <a-assets>
-        <img id="not-pokemon-img" src="assets/notZubat.gif" />
-      </a-assets>
-      <a-image
-        cursor-listener
-        src="#not-pokemon-img"
-        position="0 2 -4"
-        animation="property: position; to: 3 1 -6; dur: 2000; easing: linear; loop: true; dir:alternate"
-        look-at="#camera"
-        width="1.5"
-        height="1.5"
-      ></a-image>
-      <!-- <a-cursor></a-cursor>
-        <a-camera look-controls="touchEnabled:false;mouseEnabled:false;" id="camera"></a-camera> -->
-      <a-entity camera look-controls>
-        <a-entity
-          id="main-cursor"
-          animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 150; from: 0.1 0.1 0.1; to: 1 1 1"
-          animation__fusing="property: scale; startEvents: fusing; easing: easeInCubic; dur: 1500; from: 1 1 1; to: 0.1 0.1 0.1"
-          animation__mouseleave="property: scale; startEvents: mouseleave; easing: easeInCubic; dur: 500; to: 1 1 1"
-          cursor="fuse: true; upEvents: ['reset-fuse']"
-          material="color: black; shader: flat"
-          position="0 0 -3"
-          geometry="primitive: ring; radiusInner: .8; radiusOuter: 1.2"
-        ></a-entity>
-        <a-ring
-          id="inner-cursor-shell"
-          position="0 0 -3"
-          geometry="radiusInner: 0.11; radiusOuter: 0.12"
-          material="color: black; shader: flat"
-        ></a-ring>
-        <a-ring
-          id="inner-cursor-1"
-          position="0 0 -3"
-          geometry="radiusInner: 0.08; radiusOuter: 0.09"
-          material="color: green; shader: flat"
-          visible="false"
-        ></a-ring>
-        <a-ring
-          id="inner-cursor-2"
-          position="0 0 -3"
-          geometry="radiusInner: 0.09; radiusOuter: 0.1"
-          material="color: green; shader: flat"
-          visible="false"
-        ></a-ring>
-        <a-ring
-          id="inner-cursor-3"
-          position="0 0 -3"
-          geometry="radiusInner: 0.1; radiusOuter: 0.11"
-          material="color: green; shader: flat"
-          visible="false"
-        ></a-ring>
-        <a-text
-          position="0 0 -3"
-          align="center"
-          value="CAUGHT!"
-          id="inner-cursor-text"
-          visible="false"
-        ></a-text>
-      </a-entity>
-    </a-scene>
-  </body>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>CypherQuest</title>
+  <script src="support/aframe.min.js"></script>
+  <script src="support/aframe-look-at-component.min.js"></script>
+  <script src="support/aframe-ar-nft.js"></script>
+  <script src="appv1.js"></script>
+</head>
+
+<body style="margin: 0; overflow: hidden;">
+  <a-scene vr-mode-ui="enabled: false" embedded arjs="sourceType: webcam; debugUIEnabled: false;">
+    <a-assets>
+      <img id="revealed-mon1" src="assets/notZubat.gif" />
+    </a-assets>
+
+
+    <a-image visible="false" src="#revealed-mon1" look-at="#camera" width="1.5" height="1.5"></a-image>
+
+
+    <a-camera id="camera">
+      <a-entity id="main-cursor"
+        animation__click_scale="property: scale; startEvents: click; easing: easeInCubic; dur: 150; from: 0.1 0.1 0.1; to: 1 1 1"
+        animation__fusing_scale="property: scale; startEvents: fusing; easing: easeInCubic; dur: 1500; from: 1 1 1; to: 0.1 0.1 0.1"
+        animation__mouseleave_scale="property: scale; startEvents: mouseleave; easing: easeInCubic; dur: 500; to: 1 1 1"
+        animation__click_opacity="property: material.opacity; startEvents: click; easing: easeInCubic; dur: 150; from: 1; to: 0"
+        animation__fusing_opacity="property: material.opacity; startEvents: fusing; easing: easeInCubic; dur: 1500; from: 0; to: 1"
+        animation__mouseleave_opacity="property: material.opacity; startEvents: mouseleave; easing: easeInCubic; dur: 500; to: 0"
+        cursor="fuse: true; upEvents: ['reset-fuse']" material="color: black; shader: flat; opacity: 0"
+        position="0 0 -3" geometry="primitive: ring; radiusInner: 1; radiusOuter: 1.2"></a-entity>
+      <a-ring id="inner-cursor-shell" position="0 0 -3" geometry="radiusInner: 0.11; radiusOuter: 0.12"
+        material="color: black; shader: flat"></a-ring>
+      <a-ring id="inner-cursor-1" position="0 0 -3" geometry="radiusInner: 0.08; radiusOuter: 0.09"
+        material="color: green; shader: flat" visible="false"></a-ring>
+      <a-ring id="inner-cursor-2" position="0 0 -3" geometry="radiusInner: 0.09; radiusOuter: 0.1"
+        material="color: green; shader: flat" visible="false"></a-ring>
+      <a-ring id="inner-cursor-3" position="0 0 -3" geometry="radiusInner: 0.1; radiusOuter: 0.11"
+        material="color: green; shader: flat" visible="false"></a-ring>
+      <a-text position="0 0 -3" align="center" value="CAUGHT!" id="inner-cursor-text" visible="false"></a-text>
+    </a-camera>
+  </a-scene>
+</body>
+
 </html>
