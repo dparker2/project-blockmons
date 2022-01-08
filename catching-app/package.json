@@ -4,6 +4,8 @@
   "private": true,
   "devDependencies": {
     "@ar-js-org/ar.js": "^3.3.3-es6-beta-02",
+    "@types/aframe": "^1.0.5",
+    "@types/three": "^0.136.1",
     "@webpack-cli/generators": "^2.4.1",
     "aframe": "^1.2.0",
     "aframe-look-at-component": "^1.0.0",
