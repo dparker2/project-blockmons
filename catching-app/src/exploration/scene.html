@@ -1,0 +1,25 @@
+<a-scene vr-mode-ui="enabled: false" embedded arjs="sourceType: webcam; debugUIEnabled: false;">
+    <a-assets>
+    </a-assets>
+
+    <a-camera id="camera">
+        <a-entity id="main-cursor"
+            animation__click_scale="property: scale; startEvents: click; easing: easeInCubic; dur: 150; from: 0.1 0.1 0.1; to: 1 1 1"
+            animation__fusing_scale="property: scale; startEvents: fusing; easing: easeInCubic; dur: 1500; from: 1 1 1; to: 0.1 0.1 0.1"
+            animation__mouseleave_scale="property: scale; startEvents: mouseleave; easing: easeInCubic; dur: 500; to: 1 1 1"
+            animation__click_opacity="property: material.opacity; startEvents: click; easing: easeInCubic; dur: 150; from: 1; to: 0"
+            animation__fusing_opacity="property: material.opacity; startEvents: fusing; easing: easeInCubic; dur: 1500; from: 0; to: 1"
+            animation__mouseleave_opacity="property: material.opacity; startEvents: mouseleave; easing: easeInCubic; dur: 500; to: 0"
+            cursor="fuse: true; upEvents: ['reset-fuse']" material="color: black; shader: flat; opacity: 0"
+            position="0 0 -3" geometry="primitive: ring; radiusInner: 1; radiusOuter: 1.2"></a-entity>
+        <a-ring id="inner-cursor-shell" position="0 0 -3" geometry="radiusInner: 0.11; radiusOuter: 0.12"
+            material="color: black; shader: flat"></a-ring>
+        <a-ring id="inner-cursor-1" position="0 0 -3" geometry="radiusInner: 0.08; radiusOuter: 0.09"
+            material="color: green; shader: flat" visible="false"></a-ring>
+        <a-ring id="inner-cursor-2" position="0 0 -3" geometry="radiusInner: 0.09; radiusOuter: 0.1"
+            material="color: green; shader: flat" visible="false"></a-ring>
+        <a-ring id="inner-cursor-3" position="0 0 -3" geometry="radiusInner: 0.1; radiusOuter: 0.11"
+            material="color: green; shader: flat" visible="false"></a-ring>
+        <a-text position="0 0 -3" align="center" value="CAUGHT!" id="inner-cursor-text" visible="false"></a-text>
+    </a-camera>
+</a-scene>
