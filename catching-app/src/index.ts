@@ -5,6 +5,8 @@ import "aframe-randomizer-components";
 import "aframe-template-component";
 import "@ar-js-org/ar.js";
 
-import "./state.ts";
-import "./exploration/move-randomly-component";
+import "./styles";
+import "./ui";
+import "./state";
+import "./components";
 console.log("Hello World!");

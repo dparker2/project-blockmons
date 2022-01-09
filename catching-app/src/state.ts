@@ -1,3 +1,5 @@
+import { randomId } from "./helpers";
+
 interface RegisterState<T> {
   initialState: T;
   nonBindedStateKeys?: any[]; // Not sure
@@ -15,32 +17,42 @@ interface DirtyableArray<T> extends Array<T> {
   __dirty?: boolean;
 }
 
+export type Mob = { id: string };
+
 AFRAME.registerState({
   initialState: {
     maxSpawnable: 3,
-    numSpawned: 3,
-    spawned: [{ id: 0 }, { id: 1 }, { id: 2 }] as DirtyableArray<{
-      id: number;
+    spawned: [
+      { id: randomId() },
+      { id: randomId() },
+      { id: randomId() },
+    ] as DirtyableArray<{
+      id: string;
     }>,
+    inCombat: "",
   },
 
   handlers: {
-    despawn: (state) => {
-      console.log("despawn!");
-      if (state.numSpawned > 0) state.numSpawned -= 1;
+    despawn: (state, action: Mob) => {
+      console.log("state: despawn");
+      const index = state.spawned.findIndex(({ id }) => id === action.id);
+      if (index > -1) {
+        state.spawned.splice(index, 1);
+        state.spawned.__dirty = true;
+      }
     },
     spawn: (state) => {
-      console.log("spawn!");
-      if (state.numSpawned < state.maxSpawnable) state.numSpawned += 1;
+      console.log("state: spawn");
+      if (state.spawned.length < state.maxSpawnable) {
+        state.spawned.push({ id: randomId() });
+        state.spawned.__dirty = true;
+      }
+    },
+    enterCombat: (state, action: Mob) => {
+      console.log("state: enterCombat", action);
+      state.inCombat = action.id;
     },
   },
 
-  computeState: function (newState, payload) {
-    newState.spawned = [];
-    for (let i = 0; i < newState.numSpawned; i++) {
-      newState.spawned.push({ id: i });
-    }
-    newState.spawned.__dirty = true;
-    console.log("spawned", newState.spawned);
-  },
+  computeState: function (newState, payload) {},
 });

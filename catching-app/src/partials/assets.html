@@ -1,0 +1,16 @@
+<img id="mob" src="./../assets/notZubat.gif" />
+<script type="text/html" id="clickableSphere">
+    <a-entity
+        random-position="min: -1 1 -5; max: 1 4 -4"
+        move-randomly="min: -0.5 -0.5 -0; max: 0.5 0.5 0.1"
+        bind__move-randomly="enabled: !inCombat">
+        <a-sphere 
+            id="${id}"
+            radius="0.2"
+            bind-toggle__combat-trigger="!inCombat"
+            bind-toggle__data-clickable="!inCombat"
+            bind__visible="!inCombat">
+        </a-sphere>
+        <a-image src="#mob" bind__visible="'${id}' === inCombat" scale="1.5 1.5 1.5" />
+    </a-entity>
+</script>

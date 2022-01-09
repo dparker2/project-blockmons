@@ -1,3 +1,5 @@
+import randomBetween from "./randomBetween";
+
 export interface Vector3 {
   x: number;
   y: number;
@@ -10,11 +12,7 @@ interface RandomStepArguments {
   max: Vector3;
 }
 
-export function randomBetween(min: number, max: number): number {
-  return Math.random() * (max - min) + min;
-}
-
-export function randomStep(args: RandomStepArguments): Vector3 {
+export default function randomStep(args: RandomStepArguments): Vector3 {
   const { current, min, max } = args;
   const dx = randomBetween(min.x, max.x);
   const dy = randomBetween(min.y, max.y);

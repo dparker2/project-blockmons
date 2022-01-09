@@ -1,0 +1,19 @@
+#bottom-ui {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 1000;
+
+  .textbox {
+    color: rgb(200, 200, 200);
+    background-color: rgba(40, 55, 82, 0.6);
+    border: 5px solid rgb(50, 80, 105);
+    font-family: sans-serif;
+    box-shadow: 4px 4px 20px #000;
+    padding: 40px;
+    margin: 20px;
+    font-size: 36px;
+    border-radius: 10px;
+    max-width: 500px;
+  }
+}

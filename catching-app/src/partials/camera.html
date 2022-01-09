@@ -1,0 +1,12 @@
+<a-entity id="main-cursor" raycaster="objects: [data-clickable]" position="0 0 -3"
+    geometry="primitive: ring; radiusInner: 1; radiusOuter: 1.2" material="color: black; shader: flat; opacity: 0"
+    cursor="fuse: true"
+    animation__click_scale="property: scale; startEvents: click; easing: easeInCubic; dur: 150; from: 0.1 0.1 0.1; to: 1 1 1"
+    animation__fusing_scale="property: scale; startEvents: fusing; easing: easeInCubic; dur: 1500; from: 1 1 1; to: 0.1 0.1 0.1"
+    animation__mouseleave_scale="property: scale; startEvents: mouseleave; easing: easeInCubic; dur: 500; to: 1 1 1"
+    animation__click_opacity="property: material.opacity; startEvents: click; easing: easeInCubic; dur: 150; from: 1; to: 0"
+    animation__fusing_opacity="property: material.opacity; startEvents: fusing; easing: easeInCubic; dur: 1500; from: 0; to: 1"
+    animation__mouseleave_opacity="property: material.opacity; startEvents: mouseleave; easing: easeInCubic; dur: 500; to: 0">
+</a-entity>
+<a-ring id="inner-cursor" position="0 0 -3" geometry="radiusInner: 0.11; radiusOuter: 0.12"
+    material="color: black; shader: flat" bind__visible="!inCombat"></a-ring>

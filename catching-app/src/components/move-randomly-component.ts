@@ -1,7 +1,12 @@
 import AFRAME, { DetailEvent } from "aframe";
 import { randomStep, Vector3 } from "../helpers";
 
-function doAnimation(el: AFRAME.Entity, min: Vector3, max: Vector3) {
+function doAnimation(
+  el: AFRAME.Entity,
+  min: Vector3,
+  max: Vector3,
+  enabled: boolean
+) {
   const from = el.object3D.position;
   const to = randomStep({
     current: el.object3D.position,
@@ -13,7 +18,10 @@ function doAnimation(el: AFRAME.Entity, min: Vector3, max: Vector3) {
     from,
     to,
     dur: 1000,
+    enabled,
   };
+
+  console.log(animation);
 
   el.setAttribute("animation", animation);
 }
@@ -26,12 +34,18 @@ AFRAME.registerComponent("move-randomly", {
   schema: {
     min: { type: "vec3", default: { x: -1, y: -1, z: -1 } },
     max: { type: "vec3", default: { x: 1, y: 1, z: 1 } },
+    enabled: { type: "boolean", default: true },
   },
   init: function () {
-    doAnimation(this.el, this.data.min, this.data.max);
+    doAnimation(this.el, this.data.min, this.data.max, this.data.enabled);
 
     const repeat = (event: DetailEvent<{ name: string }>) => {
-      doAnimation(event.target, this.data.min, this.data.max);
+      doAnimation(
+        event.target,
+        this.data.min,
+        this.data.max,
+        this.data.enabled
+      );
     };
     this.el.addEventListener("animationcomplete", repeat);
   },
