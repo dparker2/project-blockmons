@@ -5,7 +5,6 @@ import "aframe-randomizer-components";
 import "aframe-template-component";
 import "@ar-js-org/ar.js";
 
-import "./styles";
 import "./ui";
 import "./state";
 import "./components";
