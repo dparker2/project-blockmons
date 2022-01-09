@@ -30,11 +30,10 @@
             material="color: green; shader: flat" visible="false"></a-ring>
         <a-text position="0 0 -3" align="center" value="CAUGHT!" id="inner-cursor-text" visible="false"></a-text>
     </a-camera>
-
-    <a-entity template="src: #clickableSphere">
+    <a-entity bind-for="for: index; in: spawned; key: id">
+        <template>
+            <a-entity template="src: #clickableSphere">
+        </template>
     </a-entity>
-    <a-entity template="src: #clickableSphere">
-    </a-entity>
-    <a-entity template="src: #clickableSphere">
     </a-entity>
 </a-scene>

@@ -1,7 +1,7 @@
-import { AFrame, DetailEvent } from "aframe";
+import AFRAME, { DetailEvent } from "aframe";
 import { randomStep, Vector3 } from "../helpers";
 
-function doAnimation(el: AFrame["AEntity"], min: Vector3, max: Vector3) {
+function doAnimation(el: AFRAME.Entity, min: Vector3, max: Vector3) {
   const from = el.object3D.position;
   const to = randomStep({
     current: el.object3D.position,
