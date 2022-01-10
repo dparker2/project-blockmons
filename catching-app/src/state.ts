@@ -1,4 +1,5 @@
 import { randomId } from "./helpers";
+import { revealSpawn } from "./actions";
 
 interface RegisterState<T> {
   initialState: T;
@@ -30,6 +31,8 @@ AFRAME.registerState({
       id: string;
     }>,
     inCombat: "",
+    enemy: null,
+    enemyImage: "",
   },
 
   handlers: {
@@ -51,8 +54,21 @@ AFRAME.registerState({
     enterCombat: (state, action: Mob) => {
       console.log("state: enterCombat", action);
       state.inCombat = action.id;
+      revealSpawn();
+    },
+    exitCombat: (state) => {
+      console.log("state: exitCombat");
+      state.inCombat = "";
+    },
+    setEnemy: (state, action) => {
+      console.log("state: setEnemy", action);
+      state.enemy = action;
     },
   },
 
-  computeState: function (newState, payload) {},
+  computeState: function (newState, payload) {
+    if (newState.enemy && newState.enemy.dexId !== undefined) {
+      newState.enemyImage = `assets/${newState.enemy.dexId}.png`;
+    }
+  },
 });
