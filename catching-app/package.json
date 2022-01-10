@@ -12,6 +12,7 @@
     "aframe-randomizer-components": "^3.0.2",
     "aframe-state-component": "^7.1.0",
     "aframe-template-component": "^3.2.1",
+    "copy-webpack-plugin": "^10.2.0",
     "css-loader": "^6.5.1",
     "gh-pages": "^3.2.3",
     "html-loader": "^3.1.0",
