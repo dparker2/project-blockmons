@@ -1,3 +1,11 @@
+#top-ui {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+}
+
 #bottom-ui {
   position: absolute;
   left: 0;
@@ -5,8 +13,14 @@
   z-index: 1000;
   width: 100%;
 
+  #combat-action-menu {
+    margin-left: auto;
+  }
+}
+
+#top-ui,
+#bottom-ui {
   .textbox {
-    display: none;
     color: rgb(200, 200, 200);
     background-color: rgba(40, 55, 82, 0.6);
     border: 5px solid rgb(50, 80, 105);
@@ -17,9 +31,5 @@
     font-size: 28px;
     border-radius: 10px;
     max-width: 500px;
-
-    &#combat-action-menu {
-      margin-left: auto;
-    }
   }
 }

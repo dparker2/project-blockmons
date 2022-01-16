@@ -21,8 +21,6 @@ function doAnimation(
     enabled,
   };
 
-  console.log(animation);
-
   el.setAttribute("animation", animation);
 }
 

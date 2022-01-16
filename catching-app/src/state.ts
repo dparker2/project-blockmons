@@ -20,20 +20,22 @@ interface DirtyableArray<T> extends Array<T> {
 
 export type Mob = { id: string };
 
+export const initialState = {
+  maxSpawnable: 3,
+  spawned: [
+    { id: randomId() },
+    { id: randomId() },
+    { id: randomId() },
+  ] as DirtyableArray<{
+    id: string;
+  }>,
+  inCombat: "",
+  enemy: null as { species: string; dexId: string; hp: number },
+  enemyImage: "",
+};
+
 AFRAME.registerState({
-  initialState: {
-    maxSpawnable: 3,
-    spawned: [
-      { id: randomId() },
-      { id: randomId() },
-      { id: randomId() },
-    ] as DirtyableArray<{
-      id: string;
-    }>,
-    inCombat: "",
-    enemy: null,
-    enemyImage: "",
-  },
+  initialState,
 
   handlers: {
     despawn: (state, action: Mob) => {
