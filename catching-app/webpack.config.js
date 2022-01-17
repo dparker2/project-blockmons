@@ -1,6 +1,5 @@
-// Generated using webpack-cli https://github.com/webpack/webpack-cli
-
 const path = require("path");
+const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const WorkboxWebpackPlugin = require("workbox-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
@@ -42,6 +41,14 @@ const config = {
     new CopyPlugin({
       patterns: [{ from: "public" }],
     }),
+
+    new webpack.ProvidePlugin({
+      // Make a global `process` variable that points to the `process` package,
+      // because the `util` package expects there to be a global variable named `process`.
+      // Thanks to https://stackoverflow.com/a/65018686/14239942
+      process: "process/browser",
+      Buffer: ["buffer", "Buffer"],
+    }),
   ],
   module: {
     rules: [
@@ -69,6 +76,12 @@ const config = {
   },
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
+    fallback: {
+      stream: require.resolve("stream-browserify"),
+      http: require.resolve("stream-http"),
+      https: require.resolve("https-browserify"),
+      os: require.resolve("os-browserify/browser"),
+    },
   },
 };
 
