@@ -6,6 +6,7 @@ export const providerOptions = {
     options: {
       rpc: {
         4: "https://rinkeby-light.eth.linkpool.io/",
+        31337: "http://localhost:8545",
         80001: "https://rpc-mumbai.matic.today",
       },
     },
