@@ -16,6 +16,7 @@ async function main() {
   );
 
   console.log("Contract deployed to address:", spirits.address);
+  console.log("Interface:", spirits.interface);
   MANIFESTS.forEach((path) => {
     fs.writeFileSync(path, manifestJSON);
     console.log(`Updated manifest at ${path}`);

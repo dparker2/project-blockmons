@@ -1,5 +1,6 @@
 import { randomId } from "./helpers";
 import { revealSpawn } from "./actions";
+import type { ApplicationState, BaseMob } from "./types";
 
 interface RegisterState<T> {
   initialState: T;
@@ -14,31 +15,19 @@ declare namespace AFRAME {
   let registerState: <T>(register: RegisterState<T>) => void;
 }
 
-interface DirtyableArray<T> extends Array<T> {
-  __dirty?: boolean;
-}
-
-export type Mob = { id: string };
-
-export const initialState = {
+export const initialState: ApplicationState = {
   maxSpawnable: 3,
-  spawned: [
-    { id: randomId() },
-    { id: randomId() },
-    { id: randomId() },
-  ] as DirtyableArray<{
-    id: string;
-  }>,
+  spawned: [{ id: randomId() }, { id: randomId() }, { id: randomId() }],
   inCombat: "",
-  enemy: null as { species: string; dexId: string; hp: number },
+  enemy: null,
   enemyImage: "",
 };
 
-AFRAME.registerState({
+AFRAME.registerState<ApplicationState>({
   initialState,
 
   handlers: {
-    despawn: (state, action: Mob) => {
+    despawn: (state, action: BaseMob) => {
       console.log("state: despawn");
       const index = state.spawned.findIndex(({ id }) => id === action.id);
       if (index > -1) {
@@ -53,7 +42,7 @@ AFRAME.registerState({
         state.spawned.__dirty = true;
       }
     },
-    enterCombat: (state, action: Mob) => {
+    enterCombat: (state, action: BaseMob) => {
       console.log("state: enterCombat", action);
       state.inCombat = action.id;
       revealSpawn();

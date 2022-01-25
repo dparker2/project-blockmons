@@ -2,7 +2,8 @@
   "scripts": {
     "start": "ts-node scripts/start-local.ts",
     "compile": "hardhat compile",
-    "deploy:localhost": "hardhat run --network localhost scripts/deploy.ts"
+    "deploy:localhost": "hardhat run --network localhost scripts/deploy.ts",
+    "deploy:hardhat": "hardhat run --network hardhat scripts/deploy.ts"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.3",
