@@ -1,26 +1,46 @@
+import { Contract } from "ethers";
 import fs from "fs";
-import { ethers } from "hardhat";
+import { ethers, artifacts } from "hardhat";
 
 const INITIAL_SUPPLY = 1000000000;
-const MANIFESTS = ["catching-app/src/contract.manifest.json"];
 
 async function main() {
-  const Spirits = await ethers.getContractFactory("Spirits");
-  const spirits = await Spirits.deploy(INITIAL_SUPPLY);
-  const manifestJSON = JSON.stringify(
-    {
-      spiritsContract: spirits.address,
-    },
-    null,
-    4
+  const [deployer] = await ethers.getSigners();
+  console.log(
+    "Deploying the contracts with the account:",
+    await deployer.getAddress()
   );
 
-  console.log("Contract deployed to address:", spirits.address);
-  console.log("Interface:", spirits.interface);
-  MANIFESTS.forEach((path) => {
-    fs.writeFileSync(path, manifestJSON);
-    console.log(`Updated manifest at ${path}`);
-  });
+  console.log("Account balance:", (await deployer.getBalance()).toString());
+
+  const Token = await ethers.getContractFactory("Spirits");
+  const token = await Token.deploy(INITIAL_SUPPLY);
+  await token.deployed();
+
+  console.log("Token address:", token.address);
+
+  // We also save the contract's artifacts and address in the frontend directory
+  saveFrontendFiles(token);
+}
+
+function saveFrontendFiles(token: Contract) {
+  const contractsDir = __dirname + "/../catching-app/src/contracts";
+
+  if (!fs.existsSync(contractsDir)) {
+    fs.mkdirSync(contractsDir);
+  }
+
+  fs.writeFileSync(
+    contractsDir + "/contract-address.json",
+    JSON.stringify({ Spirits: token.address }, undefined, 2)
+  );
+
+  const TokenArtifact = artifacts.readArtifactSync("Spirits");
+
+  fs.writeFileSync(
+    contractsDir + "/Spirits.json",
+    JSON.stringify(TokenArtifact, null, 2)
+  );
 }
 
 main()
