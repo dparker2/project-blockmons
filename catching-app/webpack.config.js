@@ -83,6 +83,7 @@ const config = {
       os: require.resolve("os-browserify/browser"),
     },
   },
+  devtool: "source-map",
 };
 
 module.exports = () => {

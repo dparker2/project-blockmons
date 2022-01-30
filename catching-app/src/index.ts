@@ -7,5 +7,5 @@ import "@ar-js-org/ar.js";
 
 import "./ui";
 import "./state";
-import "./components";
+import "./aframe-components";
 console.log("Hello World!");

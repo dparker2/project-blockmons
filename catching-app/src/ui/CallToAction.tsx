@@ -1,18 +1,20 @@
 import React from "react";
 import { useAframeState } from "./StateContext";
-
-const TEXTS = {
-  focusOnOne: "There they are! Focus on one to fight it!",
-  inCombat: (species: string) => `That's a ${species}! What to you want to do?`,
-};
+import CombatOptions from "./CombatOptions";
 
 export default function CallToAction() {
   const state = useAframeState();
-  let content = "";
+  let content: React.ReactNode = "";
+
   if (!state.inCombat) {
-    content = TEXTS.focusOnOne;
+    content = "There they are! Focus on one to fight it!";
   } else if (state.enemy?.species) {
-    content = TEXTS.inCombat(state.enemy.species);
+    content = (
+      <div>
+        That's a {state.enemy.species}! What do you want to do?{" "}
+        <CombatOptions />
+      </div>
+    );
   }
 
   if (!content) return null;
