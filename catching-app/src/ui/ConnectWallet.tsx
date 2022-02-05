@@ -8,7 +8,7 @@ export default function ConnectWallet() {
   const { provider, network, address } = wallet || {};
 
   if (!provider) {
-    pauseScene();
+    //pauseScene();
     return (
       <div className="fullpage-overlay">
         <div>
@@ -23,7 +23,7 @@ export default function ConnectWallet() {
     );
   }
 
-  playScene();
+  //playScene();
 
   return null;
 }
