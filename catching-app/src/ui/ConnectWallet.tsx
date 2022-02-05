@@ -4,7 +4,6 @@ import { playScene, pauseScene } from "../helpers";
 import { getSpiritsBalance } from "../actions";
 
 export default function ConnectWallet() {
-  const [balance, setBalance] = useState("");
   const { wallet, connectWallet } = useWalletContext();
   const { provider, network, address } = wallet || {};
 
@@ -26,15 +25,5 @@ export default function ConnectWallet() {
 
   playScene();
 
-  if (!balance) {
-    getSpiritsBalance(provider).then((balance) => {
-      setBalance(balance.toString());
-    });
-  }
-
-  return (
-    <div>
-      Connected to {network.name} ({address}) Spirits balance: {balance}
-    </div>
-  );
+  return null;
 }

@@ -3,6 +3,7 @@ import CallToAction from "./CallToAction";
 import ConnectWallet from "./ConnectWallet";
 import { StateProvider } from "./StateContext";
 import { WalletContextProvider } from "./WalletContext";
+import Inventory from "./Inventory";
 
 export default function App() {
   return (
@@ -10,6 +11,7 @@ export default function App() {
       <StateProvider>
         <div id="top-ui">
           <ConnectWallet />
+          <Inventory />
         </div>
         <div id="bottom-ui">
           <CallToAction />

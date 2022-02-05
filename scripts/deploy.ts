@@ -13,17 +13,27 @@ async function main() {
 
   console.log("Account balance:", (await deployer.getBalance()).toString());
 
-  const Token = await ethers.getContractFactory("Spirits");
-  const token = await Token.deploy(INITIAL_SUPPLY);
-  await token.deployed();
+  const SpiritsToken = await ethers.getContractFactory("Spirits");
+  const spiritsToken = await SpiritsToken.deploy(INITIAL_SUPPLY);
+  await spiritsToken.deployed();
+  const MonstersToken = await ethers.getContractFactory("Monsters");
+  const monstersToken = await MonstersToken.deploy();
+  await spiritsToken.deployed();
 
-  console.log("Token address:", token.address);
+  console.log("Spirits Token address:", spiritsToken.address);
+  console.log("Monsters Token address:", monstersToken.address);
 
   // We also save the contract's artifacts and address in the frontend directory
-  saveFrontendFiles(token);
+  saveFrontendFiles({ spiritsToken, monstersToken });
 }
 
-function saveFrontendFiles(token: Contract) {
+function saveFrontendFiles({
+  spiritsToken,
+  monstersToken,
+}: {
+  spiritsToken: Contract;
+  monstersToken: Contract;
+}) {
   const contractsDir = __dirname + "/../catching-app/src/contracts";
 
   if (!fs.existsSync(contractsDir)) {
@@ -32,14 +42,24 @@ function saveFrontendFiles(token: Contract) {
 
   fs.writeFileSync(
     contractsDir + "/contract-address.json",
-    JSON.stringify({ Spirits: token.address }, undefined, 2)
+    JSON.stringify(
+      { Spirits: spiritsToken.address, Monsters: monstersToken.address },
+      undefined,
+      2
+    )
   );
 
-  const TokenArtifact = artifacts.readArtifactSync("Spirits");
+  const SpiritsArtifact = artifacts.readArtifactSync("Spirits");
+  const MonstersArtifact = artifacts.readArtifactSync("Monsters");
 
   fs.writeFileSync(
     contractsDir + "/Spirits.json",
-    JSON.stringify(TokenArtifact, null, 2)
+    JSON.stringify(SpiritsArtifact, null, 2)
+  );
+
+  fs.writeFileSync(
+    contractsDir + "/Monsters.json",
+    JSON.stringify(MonstersArtifact, null, 2)
   );
 }
 

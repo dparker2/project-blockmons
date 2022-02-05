@@ -1,7 +1,8 @@
 import React from "react";
 import { useAframeState } from "./StateContext";
 import { useWalletContext } from "./WalletContext";
-import { claimLoot } from "../actions";
+import { claimLoot, mintEmpty, tame } from "../actions";
+import { randomBetween } from "../helpers";
 
 export default function () {
   const state = useAframeState();
@@ -9,7 +10,11 @@ export default function () {
 
   const handleKill = () => {
     console.log("Kill!");
-    claimLoot(wallet.provider);
+    if (randomBetween(0, 10) < 5) {
+      claimLoot(wallet.provider);
+    } else {
+      mintEmpty(wallet.provider, state.enemy.species);
+    }
   };
 
   return (
